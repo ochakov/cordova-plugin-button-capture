@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-button-capture",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Capture both volume buttons in accessibility service",
   "cordova": {
     "id": "cordova-plugin-button-capture",
     "platforms": [
@@ -11,11 +11,29 @@
   "keywords": [
     "ecosystem:cordova",
     "cordova-android",
-	"Volume buttons",
-	"Capture buttons",
-	"Capture volume buttons",
-	"Accessibility service"
+    "Volume buttons",
+    "Capture buttons",
+    "Capture volume buttons",
+    "Accessibility service"
   ],
   "author": "ochakov",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ochakov/cordova-plugin-button-capture.git"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=9"
+    },
+    {
+      "name": "cordova-android",
+      "version": ">=8"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/ochakov/cordova-plugin-button-capture/issues"
+  },
+  "homepage": "https://github.com/ochakov/cordova-plugin-button-capture#readme"
 }
