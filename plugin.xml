@@ -10,7 +10,7 @@
 		<engine name="cordova-android" version=">=8" />
 	</engines>
 
-	<preference name="SERVICE_NAME" default="VolumeButtonsService" />
+	<preference name="SERVICE_NAME" default="Capture Volume Buttons" />
 	<preference name="SERVICE_DESC" default="Capture both volume buttons" />
 
     <js-module

@@ -40,14 +40,10 @@ public class ButtonCapture extends CordovaPlugin {
 
     private void handleButtonPressed() {
         if (isServiceEnabled && intentName != null) {
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-
             Uri uri = Uri.parse(intentName);
-            sendIntent.setData(uri);
-            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             try {
-                instance.cordova.getActivity().startActivity(shareIntent);
+                instance.cordova.getActivity().startActivity(intent);
             } catch (Exception e) {
             }
         }

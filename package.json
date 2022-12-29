@@ -1,9 +1,9 @@
 {
-  "name": "com.ochakov.ButtonCapture",
+  "name": "cordova-plugin-button-capture",
   "version": "1.0.0",
   "description": "",
   "cordova": {
-    "id": "com.ochakov.ButtonCapture",
+    "id": "cordova-plugin-button-capture",
     "platforms": [
       "android"
     ]
@@ -12,6 +12,8 @@
     "ecosystem:cordova",
     "cordova-android",
 	"Volume buttons",
+	"Capture buttons",
+	"Capture volume buttons",
 	"Accessibility service"
   ],
   "author": "ochakov",

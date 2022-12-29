@@ -13,7 +13,7 @@ public class ButtonCaptureService extends AccessibilityService {
 
     private boolean volumeUpButtonPressed = false;
     private boolean volumeDownButtonPressed = false;
-
+    private boolean bothActivated = false;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
@@ -81,8 +81,12 @@ public class ButtonCaptureService extends AccessibilityService {
             }
         }
 
-        if (volumeUpButtonPressed && volumeDownButtonPressed) {
+        if (volumeUpButtonPressed && volumeDownButtonPressed && !bothActivated) {
+            bothActivated = true;
             onBothVolumeKeysPressed();
+        }
+        if (!volumeUpButtonPressed || !volumeDownButtonPressed) {
+            bothActivated = false;
         }
 
         return super.onKeyEvent(event);
