@@ -1,0 +1,19 @@
+{
+  "name": "com.ochakov.ButtonCapture",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "com.ochakov.ButtonCapture",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+	"Volume buttons",
+	"Accessibility service"
+  ],
+  "author": "ochakov",
+  "license": "ISC"
+}

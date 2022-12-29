@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-button-capture"
+    version="1.0.1"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    <name>ButtonCapture</name>
+
+	<engines>
+		<engine name="cordova" version=">=9" />
+		<engine name="cordova-android" version=">=8" />
+	</engines>
+
+	<preference name="SERVICE_NAME" default="VolumeButtonsService" />
+	<preference name="SERVICE_DESC" default="Capture both volume buttons" />
+
+    <js-module
+        name="ButtonCapture"
+        src="www/ButtonCapture.js">
+        <clobbers target="cordova.plugins.ButtonCapture" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ButtonCapture">
+                <param name="android-package" value="com.ochakov.plugins.ButtonCapture"/>
+            </feature>
+        </config-file>
+	
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <service android:name="com.ochakov.plugins.ButtonCaptureService"
+                android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+                android:label="$SERVICE_NAME"
+				android:description="@string/button_capture_description"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="android.accessibilityservice.AccessibilityService" />
+                </intent-filter>
+                <meta-data
+                    android:name="android.accessibilityservice"
+                    android:resource="@xml/accessibility_service_config" />
+            </service>
+        </config-file>
+        <config-file target="res/values/strings.xml" parent="/*">
+            <string name="button_capture_description">$SERVICE_DESC</string>
+        </config-file>
+
+        <source-file
+            src="src/android/ButtonCapture.java"
+            target-dir="src/com/ochakov/plugins" />
+        <source-file
+            src="src/android/ButtonCaptureService.java"
+            target-dir="src/com/ochakov/plugins" />
+        <source-file
+            src="src/android/xml/accessibility_service_config.xml"
+            target-dir="res/xml" />
+    </platform>
+</plugin>
