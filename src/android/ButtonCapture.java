@@ -1,5 +1,9 @@
 package com.ochakov.plugins;
 
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static android.content.Intent.FLAG_FROM_BACKGROUND;
+import static android.content.Intent.FLAG_RECEIVER_FOREGROUND;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +46,7 @@ public class ButtonCapture extends CordovaPlugin {
         if (isServiceEnabled && intentName != null) {
             Uri uri = Uri.parse(intentName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setFlags(FLAG_ACTIVITY_SINGLE_TOP | FLAG_FROM_BACKGROUND | FLAG_RECEIVER_FOREGROUND);
             try {
                 instance.cordova.getActivity().startActivity(intent);
             } catch (Exception e) {
