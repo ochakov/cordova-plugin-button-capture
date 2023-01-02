@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
+import java.util.Date;
+
 public class ButtonCaptureService extends AccessibilityService {
 
     private boolean volumeUpButtonPressed = false;
@@ -29,6 +31,8 @@ public class ButtonCaptureService extends AccessibilityService {
     public void onServiceConnected() {
         Log.e("TAG", "onServiceConnected");
         super.onServiceConnected();
+
+        ButtonCapture.loadSettings(this.getApplicationContext());
     }
 
     @Override
@@ -40,7 +44,7 @@ public class ButtonCaptureService extends AccessibilityService {
                     case KeyEvent.ACTION_DOWN: {
                         if (!volumeUpButtonPressed) {
                             volumeUpButtonPressed = true;
-                            ButtonCapture.volumeUpButtonPressed();
+                            ButtonCapture.volumeUpButtonPressed(getApplicationContext());
                         }
                         break;
                     }
@@ -50,8 +54,11 @@ public class ButtonCaptureService extends AccessibilityService {
                             @Override
                             public void run() {
                                 volumeUpButtonPressed = false;
+                                if (!volumeDownButtonPressed) {
+                                    bothActivated = false;
+                                }
                             }
-                        }, 300);
+                        }, ButtonCapture.switchTime);
                         break;
                     }
                 }
@@ -62,7 +69,7 @@ public class ButtonCaptureService extends AccessibilityService {
                     case KeyEvent.ACTION_DOWN: {
                         if (!volumeDownButtonPressed) {
                             volumeDownButtonPressed = true;
-                            ButtonCapture.volumeDownButtonPressed();
+                            ButtonCapture.volumeDownButtonPressed(getApplicationContext());
                         }
                         break;
                     }
@@ -72,8 +79,11 @@ public class ButtonCaptureService extends AccessibilityService {
                             @Override
                             public void run() {
                                 volumeDownButtonPressed = false;
+                                if (!volumeUpButtonPressed) {
+                                    bothActivated = false;
+                                }
                             }
-                        }, 300);
+                        }, ButtonCapture.switchTime);
                         break;
                     }
                 }
@@ -83,9 +93,17 @@ public class ButtonCaptureService extends AccessibilityService {
 
         if (volumeUpButtonPressed && volumeDownButtonPressed && !bothActivated) {
             bothActivated = true;
-            onBothVolumeKeysPressed();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (bothActivated) {
+                        onBothVolumeKeysPressed();
+                    }
+                }
+            }, ButtonCapture.holdTime);
         }
-        if (!volumeUpButtonPressed || !volumeDownButtonPressed) {
+        if (!volumeUpButtonPressed && !volumeDownButtonPressed) {
             bothActivated = false;
         }
 
@@ -94,7 +112,7 @@ public class ButtonCaptureService extends AccessibilityService {
 
     private void onBothVolumeKeysPressed() {
         Log.e("TAG", "onBothVolumeKeysPressed: BOTH BUTTONS PRESSED");
-		ButtonCapture.twoButtonsPressed();
+		ButtonCapture.twoButtonsPressed(getApplicationContext());
     }
 
     @Override

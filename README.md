@@ -36,4 +36,15 @@ cordova.plugin.disableService();
 
 // Open accessibility settings page to enable the service
 cordova.plugin.openAccessibilitySettings();
+
+// Set the requried time in msec to hold volume buttons before triggering the intent
+// For devices where both buttons cannot be pressed simultaneously, the last button must be held instead.
+// Default 0 msec (instantly, no hold needed)
+cordova.plugin.setHoldTime(holdTime);
+
+// Set the requried time in msec between pressing volume up and down buttons separately.
+// Useful for devices where both buttons cannot be pressed simultaneously.
+// In this case, it is possible to press one button and then the other, within buttonSwitchTime.
+// Default 300 msec
+cordova.plugin.setButtonSwitchTime(buttonSwitchTime);
 ```

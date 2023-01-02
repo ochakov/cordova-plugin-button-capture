@@ -15,3 +15,11 @@ exports.disableService = function (success, error) {
 exports.openAccessibilitySettings = function (success, error) {
     exec(success, error, 'ButtonCapture', 'openAccessibilitySettings', null);
 };
+
+exports.setHoldTime = function (holdTime, success, error) {
+    exec(success, error, 'ButtonCapture', 'setHoldTime', [holdTime]);
+};
+
+exports.setButtonSwitchTime = function (buttonSwitchTime, success, error) {
+    exec(success, error, 'ButtonCapture', 'setButtonSwitchTime', [buttonSwitchTime]);
+};
