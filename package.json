@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-button-capture",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Capture both volume buttons in accessibility service",
   "cordova": {
     "id": "cordova-plugin-button-capture",

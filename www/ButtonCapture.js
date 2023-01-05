@@ -23,3 +23,7 @@ exports.setHoldTime = function (holdTime, success, error) {
 exports.setButtonSwitchTime = function (buttonSwitchTime, success, error) {
     exec(success, error, 'ButtonCapture', 'setButtonSwitchTime', [buttonSwitchTime]);
 };
+
+exports.setVibrateTime = function (vibrateTime, success, error) {
+    exec(success, error, 'ButtonCapture', 'setVibrateTime', [vibrateTime]);
+};

@@ -47,4 +47,8 @@ cordova.plugin.setHoldTime(holdTime);
 // In this case, it is possible to press one button and then the other, within buttonSwitchTime.
 // Default 300 msec
 cordova.plugin.setButtonSwitchTime(buttonSwitchTime);
+
+// Set the time in msec the device will vibrate when triggering the intent
+// Default 100 msec
+cordova.plugin.setVibrateTime(vibrateTime);
 ```

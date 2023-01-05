@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.content.pm.ServiceInfo;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
@@ -26,6 +28,7 @@ public class ButtonCapture extends CordovaPlugin {
 
     protected static int holdTime = 0;
     protected static int switchTime = 300;
+    protected static int vibrateTime = 100;
     private static boolean isServiceEnabled = false;
 	private static String intentName = null;
 
@@ -50,6 +53,7 @@ public class ButtonCapture extends CordovaPlugin {
 
     public static void twoButtonsPressed(Context context) {
         if (isServiceEnabled && intentName != null) {
+            vibrate(context);
             Uri uri = Uri.parse(intentName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.setFlags(FLAG_ACTIVITY_SINGLE_TOP | FLAG_FROM_BACKGROUND | FLAG_RECEIVER_FOREGROUND);
@@ -57,6 +61,13 @@ public class ButtonCapture extends CordovaPlugin {
                 context.startActivity(intent);
             } catch (Exception e) {
             }
+        }
+    }
+
+    private static void vibrate(Context context) {
+        if (vibrateTime > 0) {
+            Vibrator v = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+            v.vibrate(VibrationEffect.createOneShot(vibrateTime, VibrationEffect.DEFAULT_AMPLITUDE));
         }
     }
 
@@ -94,6 +105,10 @@ public class ButtonCapture extends CordovaPlugin {
         }
         if (action.equals("setButtonSwitchTime")) {
             switchTime = args.getInt(0);
+            saveSettings(context);
+        }
+        if (action.equals("setVibrateTime")) {
+            vibrateTime = args.getInt(0);
             saveSettings(context);
         }
         return false;
