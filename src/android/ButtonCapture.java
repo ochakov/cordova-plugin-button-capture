@@ -86,7 +86,11 @@ public class ButtonCapture extends CordovaPlugin {
                 // Ignore
             }
 
-            v.vibrate(VibrationEffect.createOneShot(time, VibrationEffect.DEFAULT_AMPLITUDE));
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                v.vibrate(time);
+            } else {
+                v.vibrate(VibrationEffect.createOneShot(time, VibrationEffect.DEFAULT_AMPLITUDE));
+            }
         }
     }
 
