@@ -27,3 +27,11 @@ exports.setButtonSwitchTime = function (buttonSwitchTime, success, error) {
 exports.setVibrateTime = function (vibrateTime, success, error) {
     exec(success, error, 'ButtonCapture', 'setVibrateTime', [vibrateTime]);
 };
+
+exports.setScreenOffVibrateTime = function (vibrateTime, success, error) {
+    exec(success, error, 'ButtonCapture', 'setScreenOffVibrateTime', [vibrateTime]);
+};
+
+exports.setSkipFirstPressTime = function (skipFirstPressTime, success, error) {
+    exec(success, error, 'ButtonCapture', 'setSkipFirstPressTime', [skipFirstPressTime]);
+};

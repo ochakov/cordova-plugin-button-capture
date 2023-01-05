@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-button-capture"
-    version="1.0.3"
+    version="1.0.4"
     xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>ButtonCapture</name>
 
@@ -38,6 +38,7 @@
                     android:name="android.accessibilityservice"
                     android:resource="@xml/accessibility_service_config" />
             </service>
+			<uses-permission android:name="android.permission.VIBRATE" />
         </config-file>
         <config-file target="res/values/strings.xml" parent="/*">
             <string name="button_capture_description">$SERVICE_DESC</string>

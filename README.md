@@ -51,4 +51,15 @@ cordova.plugin.setButtonSwitchTime(buttonSwitchTime);
 // Set the time in msec the device will vibrate when triggering the intent
 // Default 100 msec
 cordova.plugin.setVibrateTime(vibrateTime);
+
+// Set the time in msec the device will vibrate when triggering the intent and the screen is off
+// Some devices support capturing buttons when the screen is off and the device is locked
+// Default 1000 msec
+cordova.plugin.setScreenOffVibrateTime(vibrateTime);
+
+// Set the time in msec to skip the first volume button press
+// Used to prevent volume changing when trying to press both buttons
+// The first button press will be skipped and further presses within this time will be accepted
+// Default 5000 msec
+cordova.plugin.setSkipFirstPressTime(skipFirstPressTime);
 ```

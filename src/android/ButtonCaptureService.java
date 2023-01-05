@@ -16,6 +16,7 @@ public class ButtonCaptureService extends AccessibilityService {
     private long volumeUpButtonPendingId = 1;
     private long volumeDownButtonPendingId = 1;
     private boolean bothActivated = false;
+    private long lastPressTime = 0;
     private static final String TAG = "ButtonCaptureService";
 
     @Override
@@ -141,10 +142,13 @@ public class ButtonCaptureService extends AccessibilityService {
             bothActivated = false;
         }
 
-        if (volumeUpButtonPressed && volumeDownButtonPressed) {
-            return true;
+        if (ButtonCapture.skipFirstPressTime > 0 && ButtonCapture.isServiceEnabled && event.getAction() == KeyEvent.ACTION_DOWN && (volumeUpButtonPressed || volumeDownButtonPressed)) {
+            if (event.getDownTime() - lastPressTime > ButtonCapture.skipFirstPressTime || bothActivated) {
+                lastPressTime = event.getEventTime();
+                return true;
+            }
         }
-
+        lastPressTime = event.getEventTime();
         return super.onKeyEvent(event);
     }
 
