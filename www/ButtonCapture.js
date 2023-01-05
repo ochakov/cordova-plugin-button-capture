@@ -9,7 +9,7 @@ exports.enableService = function (intent, success, error) {
 };
 
 exports.disableService = function (success, error) {
-    exec(success, error, 'ButtonCapture', 'enableService', null);
+    exec(success, error, 'ButtonCapture', 'disableService', null);
 };
 
 exports.openAccessibilitySettings = function (success, error) {
