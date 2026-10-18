@@ -43,7 +43,14 @@
             <uses-permission android:name="android.permission.VIBRATE" />
         </config-file>
 		
-        <config-file target="res/values/strings.xml" parent="/*">
+        <!-- cordova-android >= 12 generates res/values/cdv_strings.xml instead of strings.xml, and
+             plugman silently ignores a <config-file> whose target file does not exist. This target
+             hits app/src/main/res/values/cdv_strings.xml directly on cordova-android >= 12. On 7..11
+             the file does not exist and cordova-common's Android Studio fallback maps any target
+             ending in strings.xml to app/src/main/res/values/strings.xml, so the string lands there.
+             (That fallback is also why a target of res/values/cdv_strings.xml can never work: it is
+             remapped to strings.xml.) -->
+        <config-file target="app/src/main/res/values/cdv_strings.xml" parent="/*">
             <string name="button_capture_description">$SERVICE_DESC</string>
         </config-file>
 
